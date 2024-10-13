@@ -1,25 +1,17 @@
-# Gerekli kütüphaneler
+from meteostat import Point, Daily
 import pandas as pd
-import numpy as np
-from statsmodels.tsa.arima.model import ARIMA
-import matplotlib.pyplot as plt
+import datetime
 
-# Örnek veri yükleme (hava durumu verisi: sıcaklık vs.)
-# data.csv içerisinde 'Date' ve 'Temperature' kolonları olduğunu varsayıyoruz
-df = pd.read_csv('weather_data.csv', parse_dates=['Date'], index_col='Date')
+# Konum belirleme (örnek: İstanbul, Türkiye)
+location = Point(41.0082, 28.9784)  # (enlem, boylam)
 
-# ARIMA modeli için sadece sıcaklık verisini alalım
-temperature_data = df['Temperature']
+# Veri aralığı belirleme
+start = datetime.datetime(2023, 1, 1)
+end = datetime.datetime(2023, 12, 31)
 
-# ARIMA modeli tanımlama (p, d, q: AR, I, MA parametreleri)
-model = ARIMA(temperature_data, order=(5, 1, 0))
-model_fit = model.fit()
+# Günlük hava durumu verilerini alma
+data = Daily(location, start, end)
+data = data.fetch()
 
-# Tahmin yapma
-forecast = model_fit.forecast(steps=30)  # 30 gün sonrası için tahmin
-
-# Sonuçları görselleştirme
-plt.plot(temperature_data, label='Actual Temperature')
-plt.plot(forecast, label='Forecasted Temperature', color='red')
-plt.legend()
-plt.show()
+# Veriyi yazdırma
+print(data)
