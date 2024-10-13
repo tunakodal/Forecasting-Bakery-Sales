@@ -1,7 +1,7 @@
 import pandas as pd
 
 # CSV formatındaki veriyi yükleyin
-df = pd.read_csv('../Forecasting-Bakery-Sales/bakery_sales.csv')
+df = pd.read_csv('bakery_sales_coffee_merged.csv')
 
 item_counts = df['Items'].value_counts()
 
