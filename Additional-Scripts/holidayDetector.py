@@ -44,4 +44,4 @@ def isHoliday(row):
 
 df['isHoliday'] = df.apply(isHoliday, axis=1)
 
-df.to_csv('bakery_sales_dataset_w_isHoliday.csv', index=False)
+df.to_csv('bakery_sales_2.csv', index=False)
