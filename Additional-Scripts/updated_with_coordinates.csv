@@ -8,4 +8,14 @@ TransactionNo,Items,Daypart,Day,Place,Date,Time,Weather,Latitude,Longitude
 4,muffin,Morning,Sunday,Edinburgh,2016-10-30,10:08:41,few clouds,55.9533456,-3.1883749
 5,coffee,Morning,Sunday,Edinburgh,2016-10-30,10:13:03,few clouds,55.9533456,-3.1883749
 5,pastry,Morning,Sunday,Edinburgh,2016-10-30,10:13:03,few clouds,55.9533456,-3.1883749
-5,bread,Morning,Sunday,후평 3동,2016-10-30,10:13:03,few clouds,37.880584,127.75323250401861
+12100,cheesecake,Morning,Saturday,동면,2020-05-02,11:37:00,0,35.3205708,129.0729341
+12100,latte,Morning,Saturday,동면,2020-05-02,11:37:00,0,35.3205708,129.0729341
+12101,angbutter,Morning,Saturday,후평 1동,2020-05-02,11:39:00,0,37.88017925,127.75302894660821
+12101,americano,Morning,Saturday,후평 1동,2020-05-02,11:39:00,0,37.88017925,127.75302894660821
+12101,croissant,Morning,Saturday,후평 1동,2020-05-02,11:39:00,0,37.88017925,127.75302894660821
+12101,berry ade,Morning,Saturday,후평 1동,2020-05-02,11:39:00,0,37.88017925,127.75302894660821
+12102,angbutter,Afternoon,Saturday,효자 2동,2020-05-02,12:15:00,0,35.810088199999996,127.12222865000001
+12102,plain bread,Afternoon,Saturday,효자 2동,2020-05-02,12:15:00,0,35.810088199999996,127.12222865000001
+12102,cacao deep,Afternoon,Saturday,효자 2동,2020-05-02,12:15:00,0,35.810088199999996,127.12222865000001
+12103,croissant,Afternoon,Saturday,소양동,2020-05-02,13:45:00,0,37.882271,127.7246853
+12103,croissant,Afternoon,Saturday,소양동,2020-05-02,13:45:00,0,37.882271,127.7246853

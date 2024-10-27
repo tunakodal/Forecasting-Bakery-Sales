@@ -1,0 +1,47 @@
+tavg (Average Temperature):
+Günlük ortalama sıcaklık (°C cinsinden).
+
+------------------------------------------------
+
+tmin (Minimum Temperature):
+Günlük minimum sıcaklık (°C).
+
+------------------------------------------------
+
+tmax (Maximum Temperature):
+Günlük maksimum sıcaklık (°C).
+
+------------------------------------------------
+
+prcp (Precipitation):
+Günlük toplam yağış miktarı (mm cinsinden). Yağmur, kar veya dolu yağışını içerir.
+
+------------------------------------------------
+
+snow (Snowfall):
+Günlük toplam kar yağışı miktarı (cm cinsinden).
+
+------------------------------------------------
+
+wdir (Wind Direction):
+Rüzgârın yönü (derece cinsinden, 0° = Kuzey, 90° = Doğu, 180° = Güney, 270° = Batı).
+
+------------------------------------------------
+
+wspd (Wind Speed):
+Ortalama rüzgâr hızı (km/sa veya m/s cinsinden).
+
+------------------------------------------------
+
+wpgt (Wind Gust):
+Maksimum rüzgâr esintisi (fırtına) hızı (km/sa veya m/s cinsinden).
+
+------------------------------------------------
+
+pres (Pressure):
+Günlük ortalama atmosfer basıncı (hPa veya mbar cinsinden).
+
+------------------------------------------------
+
+tsun (Sunshine Duration):
+Gün içinde toplam güneşlenme süresi (dakika cinsinden).
