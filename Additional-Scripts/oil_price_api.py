@@ -1,29 +1,16 @@
-import requests
+import yfinance as yf
 
-# API anahtarınızı buraya ekleyin
-API_KEY = 'REMOVED'
-BASE_URL = 'https://api.oilpriceapi.com/v1/prices'
+# Brent petrolü için Ticker
+brent_oil_ticker = yf.Ticker("BZ=F")
+# WTI petrolü için Ticker
+wti_oil_ticker = yf.Ticker("CL=F")
 
-# Sorgulamak istediğiniz tarih
-date_to_check = '2023-11-06'
+# Brent ve WTI petrolü için tarih aralığında verileri çek
+brent_data = brent_oil_ticker.history(start="2016-10-16", end="2023-10-17")
+wti_data = wti_oil_ticker.history(start="2016-10-16", end="2023-10-17")
 
-# Ülkeleri belirleyin
-countries = ['Turkey', 'United Kingdom']  # Edinburgh Birleşik Krallık'ta yer aldığından
-
-# API isteği gönderin
-response = requests.get(
-    BASE_URL,
-    headers={'Authorization': f'Token {API_KEY}'},
-    params={
-        'country': countries,
-        'date': date_to_check  # Belirli bir tarih
-    }
-)
-
-# Yanıtı kontrol edin
-if response.status_code == 200:
-    data = response.json()
-    print(f"Petrol fiyatları ({date_to_check}):")
-    print(data)
-else:
-    print(f'Hata: {response.status_code} - {response.text}')
+# Sonuçları yazdır
+print("Brent Petrol Fiyatları:")
+print(brent_data)
+print("\nWTI Petrol Fiyatları:")
+print(wti_data)
