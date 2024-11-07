@@ -1,0 +1,84 @@
+coffee: 4761
+bread: 2893
+croissant: 2756
+angbutter: 1871
+tea: 1249
+cake: 901
+cookie: 854
+plain bread: 833
+pastry: 764
+sandwich: 683
+hot chocolate: 520
+orange pound: 492
+latte: 388
+americano: 385
+cacao deep: 343
+wiener: 343
+pandoro: 342
+brownie: 340
+jam: 338
+farm house bread: 329
+juice: 327
+muffin: 319
+scone: 308
+soup: 307
+toast: 273
+scandinavian: 239
+gateau chocolat: 183
+truffles: 170
+coke: 165
+spanish brunch: 156
+fudge: 148
+baguette bread: 135
+tiffin: 128
+milk tea: 125
+chicken stew: 113
+jammie dodgers: 109
+mineral water: 106
+hearty & seasonal: 92
+cheesecake: 90
+salad: 89
+frittata: 72
+smoothies: 66
+the nomad: 57
+vegan mincepie: 48
+berry ade: 46
+focaccia: 46
+bakewell: 40
+tartine: 38
+extra salami or feta: 33
+lemon ade: 30
+granola: 26
+eggs: 24
+vegan feast: 14
+duck egg: 12
+dulce de leche: 12
+pick and mix bowls: 11
+tacos/fajita: 11
+mighty protein: 10
+chocolates: 10
+christmas common: 8
+kids biscuit: 8
+gingerbread syrup: 8
+argentina night: 7
+empanadas: 7
+muesli: 7
+coffee granules : 7
+pintxos: 6
+drinking chocolate spoons : 6
+half slice monster : 6
+honey: 5
+crepes: 5
+panatone: 5
+victorian sponge: 4
+bread pudding: 4
+brioche and salami: 3
+lemon and coconut: 3
+cherry me dried fruit: 3
+raspberry shortbread sandwich: 3
+spread: 2
+bacon: 1
+olum & polenta: 1
+polenta: 1
+the bart: 1
+tiramisu: 1

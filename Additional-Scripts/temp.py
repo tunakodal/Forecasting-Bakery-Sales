@@ -1,10 +1,14 @@
 import pandas as pd
 
-# 'bakery_sales_dataset_full.csv' dosyasını yükle
-bakery_sales_full = pd.read_csv('bakery_sales_dataset_full.csv')
+# CSV dosyasını yükleme
+df = pd.read_csv('bakery_sales_dataset_full_revised.csv')
 
-# NaN değer içeren satırları sil
-bakery_sales_revised = bakery_sales_full.dropna()
+# Her bir ürünün kaç kez tekrarlandığını hesaplama
+item_counts = df['Items'].value_counts().dropna()
 
-# Yeni dosyayı kaydet
-bakery_sales_revised.to_csv('bakery_sales_dataset_full_revised.csv', index=False)
+# Sonuçları bir .txt dosyasına yazma
+with open('unique_items_with_counts.txt', 'w') as file:
+    for item, count in item_counts.items():
+        file.write(f"{item}: {count}\n")
+
+print("Benzersiz ürünler ve tekrar sayıları 'unique_items_with_counts.txt' dosyasına kaydedildi.")
