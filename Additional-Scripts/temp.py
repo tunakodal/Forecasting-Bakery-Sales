@@ -1,14 +1,22 @@
 import pandas as pd
 
-# CSV dosyasını yükleme
-df = pd.read_csv('bakery_sales_dataset_full_revised.csv')
+# Load the dataset
+df = pd.read_csv('bakery_sales_dataset_3.1.csv')
 
-# Her bir ürünün kaç kez tekrarlandığını hesaplama
-item_counts = df['Items'].value_counts().dropna()
+# Check for the 'filter' column and make sure it exists in the dataframe
+columns_to_move = ['Day', 'isHoliday', 'Avg_Oil_Price', 'tmin', 'tmax', 'tavg', 'wspd', 'pres']
+other_columns = [col for col in df.columns if col not in columns_to_move]
 
-# Sonuçları bir .txt dosyasına yazma
-with open('unique_items_with_counts.txt', 'w') as file:
-    for item, count in item_counts.items():
-        file.write(f"{item}: {count}\n")
+# Check if 'filter' exists
+if 'filter' in other_columns:
+    # If 'filter' exists, reorder the columns accordingly
+    new_order = ['Date'] + columns_to_move + ['filter'] + [col for col in other_columns if col != 'filter']
+else:
+    # If 'filter' doesn't exist, reorder without it
+    new_order = ['Date'] + columns_to_move + other_columns
 
-print("Benzersiz ürünler ve tekrar sayıları 'unique_items_with_counts.txt' dosyasına kaydedildi.")
+# Reorder the columns
+df = df[new_order]
+
+# Save the updated dataframe back to a CSV file
+df.to_csv('bakery_sales_dataset_3.1_reordered.csv', index=False)
