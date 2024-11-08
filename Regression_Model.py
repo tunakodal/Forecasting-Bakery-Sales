@@ -7,7 +7,7 @@ from sklearn.preprocessing import LabelEncoder
 import numpy as np
 
 # Load the dataset
-df = pd.read_csv('bakery_sales_dataset_3.1_cleaned.csv')
+df = pd.read_csv('bakery_sales_dataset_4.0.csv')
 
 # Convert 'Day' into numeric format (e.g., converting days of the week to numbers)
 df['Day'] = pd.to_datetime(df['Day'], errors='coerce').dt.dayofweek
