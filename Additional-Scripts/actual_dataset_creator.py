@@ -19,8 +19,10 @@ items = [
 # 'Items' kolonu ile 'Date' ve 'Place' kolonlarına göre sayımı yap
 item_counts = pd.crosstab([df['Date'], df['Place']], df['Items']).reindex(columns=items, fill_value=0)
 
-# Asıl veri ile birleştir ve istenmeyen kolonları sil
+# Asıl veri ile birleştir ve istenmeyen kolonları sil (sadece 'Items' kolonunu sil)
 df = df.drop(columns=["Items"])
+
+# 'Date' ve 'Place' kolonları üzerinden birleştirme işlemi
 df = df.drop_duplicates(subset=['Date', 'Place']).merge(item_counts, on=['Date', 'Place'], how='left')
 
 # Sonucu kaydet
