@@ -6,6 +6,6 @@ df = pd.read_csv('bakery_sales_dataset_4.2.csv')
 
 # Avg_Oil_Price sütunundaki 58.94499969482422 değerlerini NaN olarak değiştir
 df['Avg_Oil_Price'] = df['Avg_Oil_Price'].replace(58.94499969482422, np.nan)
-
+df['Avg_Oil_Price'] = df['Avg_Oil_Price'].replace(44.82500076293945, np.nan)
 # Dosyayı üzerine kaydet
 df.to_csv('bakery_sales_dataset_4.2.csv', index=False)
