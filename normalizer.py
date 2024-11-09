@@ -2,7 +2,7 @@ import pandas as pd
 from sklearn.preprocessing import MinMaxScaler
 
 # CSV dosyasını yükleme
-df = pd.read_csv("bakery_sales_dataset_4.2.csv")
+df = pd.read_csv("bakery_sales_dataset_4.3.csv")
 
 # Normalizasyon yapılacak sayısal sütunları seçme (Day, Place, Date hariç)
 columns_to_normalize = df.drop(columns=["Day", "Place", "Date"])
