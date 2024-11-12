@@ -1,10 +1,14 @@
 import pandas as pd
 
-# Datasetinizi yükleyin
-df = pd.read_csv('combined_price_dataset_normalized.csv')
+# CSV dosyasını yükle
+df = pd.read_csv('bakery_sales_dataset_4.5.csv')
 
-# Date kolonunu YY-mm-dd formatına çevirin
-df['Date'] = '20' + df['Date'].astype(str)
+# Date kolonunu Year, Month, Day olarak ayırma
+df['Date'] = pd.to_datetime(df['Date'])  # Tarih formatına dönüştür
+df['Year'] = df['Date'].dt.year
+df['Month'] = df['Date'].dt.month
+df['Day'] = df['Date'].dt.day
 
-# Güncellenmiş dosyayı kaydedin
-df.to_csv('combined_price_dataset_normalized.csv', index=False)
+# Yeni dataframe'i kontrol et ve kaydet
+df.drop(columns=['Date'], inplace=True)  # İsterseniz Date kolonunu kaldırabilirsiniz
+df.to_csv('bakery_sales_dataset_4.5.csv', index=False)
