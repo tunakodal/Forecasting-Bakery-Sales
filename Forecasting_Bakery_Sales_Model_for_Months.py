@@ -1,4 +1,4 @@
-# Forecasting Bakery Sales Model
+#Forecasting Bakery Sales Model for Months
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression
@@ -8,6 +8,7 @@ from sklearn.metrics import mean_squared_error
 import numpy as np
 import statsmodels.api as sm
 from sklearn.preprocessing import StandardScaler
+import tensorflow as tf
 
 df = pd.read_csv('bakery_sales_dataset_4.5.csv')
 
@@ -26,8 +27,7 @@ sum_columns = ['filter coffee', 'bread', 'croissant', 'angbutter', 'tea', 'cake'
 df = df.groupby(['Year', 'Month']).agg({**{col: 'mean' for col in avg_columns},
                                             **{col: 'sum' for col in sum_columns}}).reset_index()
 
-features = ['Month', 'isHoliday', 'tmax', 'tmin', 'tavg', 'wspd', 'pres', 'Average Price', 'Brent Price',
-            'WTI Price']
+features = ['Month', 'isHoliday', 'tmax', 'tmin', 'tavg', 'wspd', 'pres', 'Average Price', 'Brent Price', 'WTI Price' ]
 labels = ['filter coffee', 'bread', 'croissant', 'angbutter', 'tea', 'cake', 'cookie', 'plain bread',
           'pastry', 'sandwich', 'hot chocolate', 'orange pound', 'latte', 'americano', 'cacao deep',
           'wiener', 'pandoro', 'brownie', 'jam', 'farm house bread', 'juice', 'muffin', 'scone', 'soup',
@@ -43,14 +43,24 @@ X_train, X_temp, y_train, y_temp = train_test_split(X, y, test_size=0.2, random_
 X_val, X_test, y_val, y_test = train_test_split(X_temp, y_temp, test_size=0.5, random_state=42)
 
 model = MultiOutputRegressor(LinearRegression())
-model.fit(X_train, y_train)
+model.fit(X_train, y_train )
 
 y_pred = model.predict(X_test)
 
-rmse = np.sqrt(mean_squared_error(y_test, y_pred))
-rmse_percentage = (rmse / y_test.mean().mean()) * 100
+rmse = []
+for label in labels:
+    rmse.append(np.sqrt(mean_squared_error(y_test[label], y_pred[:, labels.index(label)])))
 
-mape = np.mean(np.abs((y_test - y_pred) / y_test)) * 100
+rmse_percentage = []
+for i in range(len(labels)):
+    rmse_percentage.append((rmse[i] / y_test[labels[i]].mean()) * 100)
+
+mape_values = []
+for i, label in enumerate(labels):
+    y_test_label = y_test[label]
+    non_zero_indices = y_test_label != 0
+    mape_label = np.mean(np.abs((y_test_label[non_zero_indices] - y_pred[non_zero_indices, i]) / y_test_label[non_zero_indices])) * 100
+    mape_values.append(mape_label)
 
 adjusted_r2_values = []
 f_values = []
@@ -64,35 +74,14 @@ for label in labels:
     p_values.append(ols_model.f_pvalue)
 
 
-# Function to make predictions based on an array input
-def predict_sales(input_array):
-    """
-    Predicts sales based on an input array.
 
-    Parameters:
-    - input_array: A list or 1D numpy array with values for [Day_Name_encoded, Year, Month, Day, isHoliday, tmax, tmin, tavg, wspd, pres, Average Price, Brent Price, WTI Price]
-
-    Returns:
-    - Dictionary with predicted sales for each product.
-    """
-    # Convert the input array to a DataFrame with the same column names as `X_train`
-    input_df = pd.DataFrame([input_array], columns=features)
-
-    # Make prediction
-    prediction = model.predict(input_df)
-
-    # Create a dictionary for readability
-    prediction_dict = {labels[i]: prediction[0][i] for i in range(len(labels))}
-
-    print("\nPredicted sales for each product:")
-    for label, pred in prediction_dict.items():
-        print(f"{label}: {pred:.2f}")
-
-    return prediction_dict
-
-
-# Example usage with input array
-# [Day_Name_encoded, Year, Month, Day, isHoliday, tmax, tmin, tavg, wspd, pres, Average Price, Brent Price, WTI Price]
-input_array = [11, 0, 15.2, 7.1, 11.1, 12.3, 1012, 85.0, 79.5, 80.3]
-predicted_sales = predict_sales(input_array)
-print(df[features].describe())
+print("\nAdjusted R², F-value, and p-value for each product:")
+for i, label in enumerate(labels):
+    print(f"{label}:")
+    print(f"  Adjusted R²: {adjusted_r2_values[i]:.4f}")
+    print(f"  F-value: {f_values[i]:.4f}")
+    print(f"  P-value: {p_values[i]:.4f}")
+    print(f"  RMSE: {rmse[i]:.4f}")
+    print(f"  RMSE Percentage: {rmse_percentage[i]:.2f}%")
+    print(f"  MAPE: {mape_values[i]:.2f}%")
+    print()

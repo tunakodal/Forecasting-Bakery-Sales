@@ -53,7 +53,7 @@ model.compile(optimizer='adam',
               loss=huber_loss,
               metrics=[root_mean_squared_error, r2_score])
 
-model.fit(feature_train, labels_train, epochs=500, batch_size = 32, validation_data=(feature_val, labels_val))
+model.fit(feature_train, labels_train, epochs=50, batch_size = 32, validation_data=(feature_val, labels_val))
 
 test_loss , test_rmse, test_r2 = model.evaluate(feature_test, labels_test)
 print(f'Test Huber Loss: {test_loss}, Test RMSE: {test_rmse}, Test R2: {test_r2}')

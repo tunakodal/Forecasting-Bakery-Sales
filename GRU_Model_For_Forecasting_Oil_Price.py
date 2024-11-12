@@ -5,6 +5,7 @@ import tensorflow as tf
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import GRU, Dense
 from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
 
 df = pd.read_csv('combined_price_dataset_normalized.csv')
 
@@ -53,13 +54,4 @@ model.compile(optimizer='adam',
 model.fit(feature_train, labels_train, epochs=50, batch_size = 32, validation_data=(feature_val, labels_val))
 
 test_loss , test_rmse, test_r2, test_mape = model.evaluate(feature_test, labels_test)
-
-# Make predictions on the test set
-predictions = model.predict(feature_test)
-
-# Display the first 10 predictions and actual values for comparison
-for i in range(10):
-    print(f"Prediction: {predictions[i]}, Actual: {labels_test[i]}")
-
-# Print evaluation metrics
 print(f'Test Loss: {test_loss}, Test MAPE: {test_mape}, Test RMSE: {test_rmse}, Test R2: {test_r2}')
