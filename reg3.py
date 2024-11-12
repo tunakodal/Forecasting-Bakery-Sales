@@ -11,13 +11,22 @@ from sklearn.preprocessing import StandardScaler
 
 df = pd.read_csv('bakery_sales_dataset_4.5.csv')
 
-label_encoder = LabelEncoder()
-df['Day_Name_encoded'] = label_encoder.fit_transform(df['Day_Name'])
+df.drop(columns=['Day'])
 
-scaler = StandardScaler()
-df['Day_Name_encoded'] = scaler.fit_transform(df[['Day_Name_encoded']])
+avg_columns = ['isHoliday', 'Brent Price', 'Average Price', 'WTI Price', 'tmax', 'tmin', 'tavg', 'wspd', 'pres']
+sum_columns = ['filter coffee', 'bread', 'croissant', 'angbutter', 'tea', 'cake', 'cookie', 'plain bread',
+              'pastry', 'sandwich', 'hot chocolate', 'orange pound', 'latte', 'americano', 'cacao deep',
+              'wiener', 'pandoro', 'brownie', 'jam', 'farm house bread', 'juice', 'muffin', 'scone', 'soup',
+              'toast', 'scandinavian', 'gateau chocolat', 'truffles', 'coke', 'spanish brunch', 'fudge',
+              'baguette bread', 'tiffin', 'milk tea', 'chicken stew', 'jammie dodgers', 'mineral water',
+              'hearty & seasonal', 'cheesecake', 'salad', 'frittata', 'smoothies', 'the nomad', 'vegan mincepie',
+              'berry ade', 'focaccia']
 
-features = ['Day_Name_encoded', 'isHoliday', 'tmax', 'tmin', 'tavg', 'wspd', 'pres', 'Average Price', 'Brent Price',
+
+df = df.groupby(['Year', 'Month']).agg({**{col: 'mean' for col in avg_columns},
+                                            **{col: 'sum' for col in sum_columns}}).reset_index()
+
+features = ['Month', 'isHoliday', 'tmax', 'tmin', 'tavg', 'wspd', 'pres', 'Average Price', 'Brent Price',
             'WTI Price']
 labels = ['filter coffee', 'bread', 'croissant', 'angbutter', 'tea', 'cake', 'cookie', 'plain bread',
           'pastry', 'sandwich', 'hot chocolate', 'orange pound', 'latte', 'americano', 'cacao deep',
@@ -84,6 +93,6 @@ def predict_sales(input_array):
 
 # Example usage with input array
 # [Day_Name_encoded, Year, Month, Day, isHoliday, tmax, tmin, tavg, wspd, pres, Average Price, Brent Price, WTI Price]
-input_array = [2, 0, 15.2, 7.1, 11.1, 12.3, 1012, 85.0, 79.5, 80.3]
+input_array = [11, 0, 15.2, 7.1, 11.1, 12.3, 1012, 85.0, 79.5, 80.3]
 predicted_sales = predict_sales(input_array)
 print(df[features].describe())
