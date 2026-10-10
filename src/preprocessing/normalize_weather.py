@@ -2,7 +2,7 @@ import pandas as pd
 from sklearn.preprocessing import StandardScaler
 
 # 1. CSV dosyasını yükleyin
-df = pd.read_csv('combined_weather_dataset.csv')
+df = pd.read_csv('data/raw/weather.csv')
 
 # 2. Normalizasyon yapmak istediğiniz sütunları seçin
 columns_to_normalize = ['Month', 'Day', 'Year']
@@ -20,6 +20,6 @@ df_normalized = pd.DataFrame(df_normalized, columns=columns_to_normalize)
 df[columns_to_normalize] = df_normalized
 
 # 6. Sonuçları yeni bir CSV dosyasına kaydedin
-df.to_csv('combined_weather_dataset_normalized.csv', index=False)
+df.to_csv('data/normalized/weather_normalized.csv', index=False)
 
 print("Veriler başarıyla normalleştirildi ve kaydedildi.")

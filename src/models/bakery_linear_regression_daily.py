@@ -1,4 +1,4 @@
-#Forecasting Bakery Sales Model for Months
+#Forecasting Bakery Sales Model
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression
@@ -10,24 +10,12 @@ import statsmodels.api as sm
 from sklearn.preprocessing import StandardScaler
 import tensorflow as tf
 
-df = pd.read_csv('bakery_sales_dataset_4.5.csv')
+df = pd.read_csv('data/raw/bakery_sales.csv')
 
-df.drop(columns=['Day'])
+label_encoder = LabelEncoder()
+df['Day_Name_encoded'] = label_encoder.fit_transform(df['Day_Name'])
 
-avg_columns = ['isHoliday', 'Brent Price', 'Average Price', 'WTI Price', 'tmax', 'tmin', 'tavg', 'wspd', 'pres']
-sum_columns = ['filter coffee', 'bread', 'croissant', 'angbutter', 'tea', 'cake', 'cookie', 'plain bread',
-              'pastry', 'sandwich', 'hot chocolate', 'orange pound', 'latte', 'americano', 'cacao deep',
-              'wiener', 'pandoro', 'brownie', 'jam', 'farm house bread', 'juice', 'muffin', 'scone', 'soup',
-              'toast', 'scandinavian', 'gateau chocolat', 'truffles', 'coke', 'spanish brunch', 'fudge',
-              'baguette bread', 'tiffin', 'milk tea', 'chicken stew', 'jammie dodgers', 'mineral water',
-              'hearty & seasonal', 'cheesecake', 'salad', 'frittata', 'smoothies', 'the nomad', 'vegan mincepie',
-              'berry ade', 'focaccia']
-
-
-df = df.groupby(['Year', 'Month']).agg({**{col: 'mean' for col in avg_columns},
-                                            **{col: 'sum' for col in sum_columns}}).reset_index()
-
-features = ['Month', 'isHoliday', 'tmax', 'tmin', 'tavg', 'wspd', 'pres', 'Average Price', 'Brent Price', 'WTI Price' ]
+features = ['Day_Name_encoded','isHoliday', 'tmax', 'tmin', 'tavg', 'wspd', 'pres', 'Average Price', 'Brent Price', 'WTI Price' ]
 labels = ['filter coffee', 'bread', 'croissant', 'angbutter', 'tea', 'cake', 'cookie', 'plain bread',
           'pastry', 'sandwich', 'hot chocolate', 'orange pound', 'latte', 'americano', 'cacao deep',
           'wiener', 'pandoro', 'brownie', 'jam', 'farm house bread', 'juice', 'muffin', 'scone', 'soup',

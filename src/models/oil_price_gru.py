@@ -7,7 +7,7 @@ from tensorflow.keras.layers import GRU, Dense
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 
-df = pd.read_csv('combined_price_dataset_normalized.csv')
+df = pd.read_csv('data/normalized/oil_price_normalized.csv')
 
 feature_columns = df[['Year', 'Month', 'Day']]
 label_columns = df[['Average Price', 'Brent Price', 'WTI Price']]

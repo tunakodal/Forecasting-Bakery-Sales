@@ -7,7 +7,7 @@ from tensorflow.keras.layers import LSTM, Dense
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 
-df = pd.read_csv('combined_weather_dataset_normalized.csv')
+df = pd.read_csv('data/normalized/weather_normalized.csv')
 
 feature_columns = df[['Year', 'Month', 'Day']]
 label_columns = df[['tmax', 'tmin', 'tavg', 'wspd', 'pres']]
